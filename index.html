@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, td {
+  border: 1px solid black;
+}
+</style>
+</head>
+<body>
+
+<p>Click the button to change the content of the first table cell.</p>
+<input type="text" id="etats" />
+<input type="text" id="transitions" />
+<div id="div"></div>
+<table oninput="transition()" id="table">
+  <tr>
+    <td contenteditable='true'>#</td>
+    <td contenteditable='true'>A</td>
+    <td contenteditable='true'>B</td>
+    <td contenteditable='true'>C</td>
+    <td contenteditable='true'>D</td>
+  </tr>
+  <tr>
+    <td contenteditable='true' >1</td>
+    <td contenteditable='true' >q</td>
+    <td contenteditable='true' >a</td>
+    <td contenteditable='true' >c</td>
+    <td contenteditable='true' >b</td>
+  </tr>
+  <tr>
+      <td contenteditable='true' >2</td>
+      <td contenteditable='true' >r</td>
+      <td contenteditable='true' >t</td>
+      <td contenteditable='true' >y</td>
+      <td contenteditable='true' >v</td>
+    </tr>  <tr>
+        <td contenteditable='true' >3</td>
+        <td contenteditable='true' >g</td>
+        <td contenteditable='true' >n</td>
+        <td contenteditable='true' >m</td>
+        <td contenteditable='true' >p</td>
+      </tr>
+      <tr>
+          <td contenteditable='true' >4</td>
+          <td contenteditable='true' >c</td>
+          <td contenteditable='true' >i</td>
+          <td contenteditable='true' >j</td>
+          <td contenteditable='true' >k</td>
+        </tr>
+</table>
+<br> 
+
+<button onclick="transition()">Try it</button>
+
+<script>
+
+  function addTable(){
+    var string = '<table class="table"><thead><tr><th scope="col">#</th>';
+    var th= "";
+    var etat = document.getElementById("etats").value;
+    alert(etat);
+    var etats =etat.split(",");
+    etats.forEach(element => {
+        th=th+'<th scope="col">'+element+'</th>';
+    });
+    string=string+th+'</tr></thead><tbody>';
+
+    etats.forEach(element=>{
+      th='<tr><th scope="row">'+element+'</th>';
+      etats.forEach(element => {
+        th=th+'<td contenteditable=\'true\'>'+""+'</td>';
+      });
+      th=th+'</tr>';
+      string=string+th;
+    });
+
+    string=string +'</tbody></table>';
+    document.write(string);
+  }
+
+  function transition(){
+    var etat = document.getElementById("etats").value;
+    var etats =etat.split(",");
+    var tran="";
+    var a ;
+    var b;
+    var c; 
+    var i,j;
+    for ( i=0;i<etats.length;i++) {
+    for ( j=0;j<etats.length;j++) {
+      var dep = document.getElementById("table").rows[i+1].cells;
+      //dep[1].innerHTML ; 
+
+      var arr = document.getElementById("table").rows[0].cells;
+      //arr[j].innerHTML ;
+
+      var sym = document.getElementById("table").rows[i+1].cells;
+      //sym[j].innerHTML ;
+      a=dep[0].innerHTML.replace("<br>","");
+      b=sym[j+1].innerHTML.replace("<br>","");
+      c=arr[j+1].innerHTML.replace("<br>","");
+      b.split(",").forEach(elt =>{
+        tran=tran+a+","+elt+","+c+";";
+      });
+      //c=arr[j+1].innerHTML.replace("<br>","");
+      //tran=tran+a+","+b+","+c+";";
+   }
+   var affiche=document.getElementById("div");
+   document.getElementById("transitions").value=tran;
+}
+  }
+ 
+function myFunction() {
+  var x = document.getElementById("table").rows[2].cells;
+  x[1].innerHTML ;
+  alert(x[0].innerHTML);
+}
+</script>
+
+</body>
+</html>
+

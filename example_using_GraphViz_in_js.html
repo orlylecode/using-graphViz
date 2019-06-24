@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>using Viz.js in js by orly</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css" />
+    <script src="viz.js"></script>
+    <script src="app.js"></script>
+    <script src="full.render.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Automates Graphs</a>
+            </div>
+        </div>
+    </nav>
+    <div class="col-sm-12">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="source">Graphs source </label>
+                <textarea class="form-control" rows="20" id="source">
+
+    digraph G {
+            a0 -> a1 [color="red"]
+            a1-> a2 ;
+            a0-> a3;
+           q2-> g4;
+        label = "Automates";
+        
+		label = "Automates";
+	}
+                            </textarea>
+                            <button class="btn" onclick="afficher()">afficher</button>
+            </div>
+        </div>
+        <div id="cible" class="col-sm-6">
+
+        </div>
+    </div>
+    <script>
+        afficher();
+        function afficher(){
+    document.getElementById("cible").innerHTML=("");
+    var graph =  graph = document.getElementById("source").value;
+    var viz = new Viz();
+
+    viz.renderSVGElement(graph)
+        .then(function (element) {
+            document.getElementById("cible").appendChild(element);
+        })
+        }
+
+    </script>
+</body>
+
+</html>
